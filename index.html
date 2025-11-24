@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Pangsit Kuah — Produk Kolaborasi</title>
+
+    <style>
+        /* ================= GENERAL STYLE ================= */
+        :root {
+            --bg: #f7f8fb;
+            --card: #ffffff;
+            --accent: #2b8cff;
+            --muted: #6b7280;
+            --radius: 12px;
+            --shadow: 0 6px 18px rgba(43,140,255,0.12);
+            --container: 1100px;
+        }
+
+        * { box-sizing: border-box; }
+        html, body {
+            height: 100%;
+            margin: 0;
+            font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial;
+            background: var(--bg);
+            color: #111;
+        }
+
+        .wrap {
+            max-width: var(--container);
+            margin: 36px auto;
+            padding: 24px;
+        }
+
+        /* ================= HEADER ================= */
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo {
+            width: 56px;
+            height: 56px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, var(--accent), #67c8ff);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 20px;
+        }
+
+        .title { font-size: 18px; font-weight: 700; }
+        .subtitle { font-size: 13px; color: var(--muted); }
+
+        nav.topnav {
+            display: flex;
+            gap: 12px;
+        }
+
+        nav.topnav a {
+            padding: 10px 14px;
+            border-radius: 10px;
+            text-decoration: none;
+            color: var(--muted);
+            font-weight: 600;
+        }
+
+        nav.topnav a:hover {
+            background: #eef6ff;
+            color: var(--accent);
+        }
+
+        /* ================= HERO ================= */
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr 440px;
+            gap: 28px;
+            margin-top: 18px;
+            align-items: center;
+        }
+
+        .card {
+            background: var(--card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 22px;
+        }
+
+        .hero h1 { margin: 0; font-size: 28px; }
+
+        .badge {
+            display: inline-block;
+            background: #e6f0ff;
+            color: var(--accent);
+            padding: 6px 10px;
+            border-radius: 999px;
+            font-weight: 700;
+            margin-top: 10px;
+        }
+
+        .lead {
+            color: var(--muted);
+            margin-top: 12px;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 320px;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+
+        /* ================= CONTENT STRUCTURE ================= */
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            margin-top: 18px;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+
+        .promo {
+            display: grid;
+            grid-template-columns: 1fr 420px;
+            gap: 18px;
+        }
+
+        .poster {
+            width: 100%;
+            height: 540px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        video {
+            width: 100%;
+            height: 540px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        /* ================= PDF VIEWER ================= */
+        .ppt-frame {
+            width: 100%;
+            height: 520px;
+            border: 1px solid #d6d6d6;
+            border-radius: 14px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+            margin-top: 12px;
+        }
+
+        /* ================= BUTTONS ================= */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 14px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        .btn--primary {
+            background: var(--accent);
+            color: white;
+        }
+
+        .btn--ghost {
+            background: transparent;
+            border: 1px solid #e6eefc;
+            color: var(--accent);
+        }
+
+        footer {
+            margin-top: 28px;
+            text-align: center;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        /* ================= FADE-IN ANIMATION ================= */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity .8s ease, transform .8s ease;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ================= BACK TO TOP ================= */
+        #backToTop {
+            position: fixed;
+            bottom: 28px;
+            right: 28px;
+            background: #2962ff;
+            color: #fff;
+            padding: 12px 18px;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+            font-size: 14px;
+            display: none;
+            transition: all 0.3s ease;
+        }
+        #backToTop:hover { background: #0039cb; }
+
+        /* ================= RESPONSIVE ================= */
+        @media(max-width:980px){
+            .hero{ grid-template-columns:1fr; }
+            .promo{ grid-template-columns:1fr; }
+            .grid-3{ grid-template-columns:1fr; }
+        }
+
+        .small { font-size: 13px; color: var(--muted); }
+    </style>
+</head>
+
+<body>
+<div class="wrap">
+
+    <!-- ================= HEADER ================= -->
+    <header class="fade-in">
+        <div class="brand">
+            <div class="logo">PK</div>
+            <div>
+                <div class="title">Pangsit Kuah — Project Kolaborasi</div>
+                <div class="subtitle">Matematika • PKK • Koding AI</div>
+            </div>
+        </div>
+
+        <nav class="topnav">
+            <a href="#produk">Produk</a>
+            <a href="#promosi">Promosi</a>
+            <a href="#laporan">Laporan</a>
+            <a href="#presentasi">Presentasi</a>
+        </nav>
+    </header>
+
+    <!-- ================= HERO ================= -->
+    <section class="hero fade-in">
+        <div class="card">
+            <div class="badge">PK</div>
+            <h1>Pangsit Kuah — Hangat, Gurih, Menggoda</h1>
+            <p class="lead">
+                Situs ini menampilkan poster, video promosi, laporan anggaran, dan slide presentasi.
+            </p>
+
+            <div class="grid-3" style="margin-top:18px">
+                <div class="card small">
+                    <strong>Biaya Produksi</strong>
+                    <div class="small">Rp 400.000</div>
+                </div>
+                <div class="card small">
+                    <strong>Estimasi Penjualan</strong>
+                    <div class="small">67 porsi / Bulan</div>
+                </div>
+                <div class="card small">
+                    <strong>Margin</strong>
+                    <div class="small">60%</div>
+                </div>
+            </div>
+        </div>
+
+        <aside class="card" style="text-align:center">
+            <img src="poster.jpg" class="product-image" alt="Poster Pangsit Kuah">
+            <div style="margin-top:12px">
+                <a class="btn btn--primary" href="#promosi">Lihat Promosi</a>
+                <a class="btn btn--ghost" href="laporan.pdf" download style="margin-left:8px">Unduh Laporan</a>
+            </div>
+        </aside>
+    </section>
+
+    <!-- ================= PROMOSI ================= -->
+    <section id="promosi" class="fade-in" style="margin-top:26px">
+        <div class="section-title">
+            <h3>Promosi — Video & Poster</h3>
+            <div class="small">Durasi video: 30 detik</div>
+        </div>
+
+        <div class="promo">
+            <div class="card">
+                <h4>Video Promosi</h4>
+                <p class="small">Saksikan video promosi pangsit kuah — pendek, padat, menggugah selera.</p>
+                <video controls preload="metadata">
+                    <source src="video.mp4" type="video/mp4">
+                </video>
+            </div>
+
+            <div class="card">
+                <h4>Poster Promosi</h4>
+                <p class="small">Poster siap unduh untuk media sosial atau cetak.</p>
+                <img src="poster.jpg" class="poster" alt="Poster Pangsit Kuah">
+
+                <div style="margin-top:12px" class="downloads">
+                    <a class="btn btn--primary" href="poster.jpg" download>Download Poster</a>
+                    <a class="btn btn--ghost" href="#produk">Kembali ke Produk</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= PRODUK ================= -->
+    <section id="produk" class="fade-in" style="margin-top:26px">
+        <div class="section-title">
+            <h3>Produk — Deskripsi & Spesifikasi</h3>
+        </div>
+
+        <div class="card">
+            <h4>Deskripsi Pangsit Kuah</h4>
+            <p class="small">Pangsit kuah adalah hidangan berkuah hangat yang terdiri dari pangsit berisi daging yang direbus dan disajikan dengan kaldu gurih. Pangsit biasanya dibuat dari kulit tipis berbahan tepung terigu yang diisi campuran daging ayam atau sapi cincang, bawang putih, dan bumbu khas. Sajian ini memiliki cita rasa yang ringan, lembut, dan cocok dinikmati kapan saja, terutama saat cuaca dingin. Dalam penyajiannya, pangsit kuah sering ditambahkan pelengkap seperti daun bawang, bawang goreng, sayuran, dan kadang mie.</p>
+
+            <h4>Spesifikasi Produk Pangsit Kuah</h4>
+            <p class="small">1. Komposisi / Bahan Utama</p>
+            <ul class="small">
+                <li>Kulit pangsit: tepung terigu, garam, air, dan minyak.</li>
+                <li>Daging ayam cincang (bisa diganti daging sapi/udang)</li>
+                <li>Bawang putih halus</li>
+                <li>Garam, merica, kaldu bubuk</li>
+                <li>Daun bawang cincang</li>
+            </ul>
+
+            <p class="small">2. Karakteristik Produk</p>
+            <ul class="small">
+                <li>Tekstur pangsit: lembut di luar, gurih di dalam.</li>
+                <li>Rasa: kaldu gurih, sedikit manis-asin, aroma bawang yang kuat.</li>
+                <li>Warna: kuah bening kekuningan, pangsit putih kekuningan.</li>
+                <li>Aroma: wangi bawang putih dan kaldu.</li>
+            </ul>
+
+            <p class="small">3. Porsi / Ukuran</p>
+            <ul class="small">
+                <li>6 buah pangsit per porsi.</li>
+                <li>Kuah ± 250 ml.</li>
+                <li>Berat total per porsi sekitar 350 gram.</li>
+            </ul>
+
+            <p class="small">4. Penyajian</p>
+            <ul class="small">
+                <li>Disajikan panas dalam mangkuk.</li>
+                <li>Dilengkapi daun bawang, seledri, bawang goreng, dan sambal sesuai selera.</li>
+                <li>Opsional: mie, sayur sawi, pangsit rebus + goreng kombinasi.</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- ================= LAPORAN ================= -->
+    <section id="laporan" class="fade-in" style="margin-top:26px">
+        <div class="section-title">
+            <h3>Laporan Anggaran — PDF</h3>
+        </div>
+
+        <div class="card">
+            <p class="small">Laporan anggaran lengkap tersedia dalam format PDF.</p>
+
+            <div style="display:flex;gap:12px;margin-top:12px;flex-wrap:wrap">
+                <a class="btn btn--primary" href="laporan.pdf" download>Download Laporan (PDF)</a>
+                <a class="btn btn--ghost" href="#presentasi">Lihat Slide Presentasi</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= PRESENTASI ================= -->
+    <section id="presentasi" class="fade-in" style="margin-top:26px">
+        <div class="section-title">
+            <h3>Presentasi — Slide (PDF)</h3>
+            <div class="small">Slide presentasi pangsit kuah</div>
+        </div>
+
+        <div class="card">
+            <p class="small">Berikut slide presentasi yang telah dikonversi ke PDF.</p>
+
+            <embed src="Pangsit_Kuah.pdf" type="application/pdf" class="ppt-frame" />
+
+            <div style="margin-top:14px; display:flex; gap:12px; flex-wrap:wrap">
+                <a class="btn btn--ghost" href="Pangsit_Kuah.pptx" download>Download PPTX</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="fade-in">
+        © 2025 Project Pangsit Kuah — Kolaborasi Matematika • PKK • Koding AI
+    </footer>
+</div>
+
+<!-- ================= BACK TO TOP ================= -->
+<button id="backToTop">↑ Kembali ke Atas</button>
+
+
+<!-- ================= JS EFFECTS ================= -->
+<script>
+    // Fade-in effect
+    const faders = document.querySelectorAll('.fade-in');
+    const io = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add('visible');
+            obs.unobserve(entry.target);
+        });
+    }, { threshold: 0.2 });
+
+    faders.forEach(f => io.observe(f));
+
+    // Back to top button
+    const backBtn = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => {
+        backBtn.style.display = window.scrollY > 300 ? "block" : "none";
+    });
+
+    backBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    // Smooth scroll internal links
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+        a.addEventListener('click', (e) => {
+            e.preventDefault();
+            const id = a.getAttribute('href').substring(1);
+            const el = document.getElementById(id);
+            if (el) el.scrollIntoView({ behavior: 'smooth' });
+        });
+    });
+</script>
+
+</body>
+</html>
